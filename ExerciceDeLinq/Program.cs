@@ -74,6 +74,85 @@ et prénom séparés par un espace), son id et sa date de naissance.
             }*/
             #endregion
 
+            #region Exercice 3.1
+            /*Pour chaque étudiant né avant 1955, donner  le nom, le résultat annuel et le statut. Le statut prend la valeur « OK » si l’étudiant à obtenu au moins 12 comme résultat annuel et « KO » dans le cas contraire. 
+
+            var result = dc.Students
+                .Where(s => s.BirthDate.Year < 1955)
+                .Select(s => new { 
+                    Nom = s.Last_Name,
+                    ResultatAnnuel = s.Year_Result,
+                    Status = (s.Year_Result >= 12)? "Ok" : "KO"
+                });
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }*/
+
+            #endregion
+
+            #region Exercice 3.3
+            /*Ecrire une requête pour présenter le nom, l’id de section et de tous les étudiants             qui ont un nom de famille qui termine par r.
+
+            var result = dc.Students
+                .Where(s => s.Last_Name.EndsWith('r'))
+                .Select(s => new { 
+                    Nom = s.Last_Name,
+                    s.Section_ID
+                });
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }*/
+
+            #endregion
+
+            #region Exercice 3.5
+            /*Ecrire une requête pour présenter le nom complet (nom et prénom séparés par un espace) et le résultat annuel classé par nom croissant sur le nom de tous les étudiants appartenant à la section 1110. 
+
+            var result = dc.Students
+                .Where(s => s.Section_ID == 1110)
+                .OrderBy(s => s.Last_Name)
+                .Select(s => new { 
+                    NomComplet = $"{s.Last_Name} {s.First_Name}",
+                    ResultatAnnuel = s.Year_Result
+                });
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }*/
+
+            #endregion
+
+            #region Exercice 3.6
+            /*Ecrire une requête pour présenter le nom, l’id de section et le résultat annuel classé par ordre croissant sur la section de tous les étudiants appartenant aux sections 1010 et 1020 ayant un résultat annuel qui n’est pas compris entre 12 et 18. */
+
+            var result = dc.Students
+                .Where(s => s.Section_ID == 1010 || s.Section_ID == 1020)
+                .Where(s => s.Year_Result < 12 || s.Year_Result > 18)
+                .OrderBy(s => s.Section_ID)
+                .Select(s => new { 
+                    Nom = s.Last_Name,
+                    s.Section_ID,
+                    ResultatAnnuel = s.Year_Result
+                });
+
+            foreach (var item in result)
+            {
+                Console.WriteLine(item);
+            }
+
+            //.Where( s =>
+            //  (s.Section_ID == 1010 || s.Section_ID == 1020) &&
+            //  (s.Year_Result < 12 || s.Year_Result > 18)
+            //)
+
+
+            #endregion
+
             #endregion
 
             #region Console.ReadLine()
