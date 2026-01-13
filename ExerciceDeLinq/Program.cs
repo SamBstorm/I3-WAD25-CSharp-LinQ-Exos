@@ -1,4 +1,5 @@
 ﻿using LINQDataContext;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace ExerciceDeLinq
 {
@@ -128,7 +129,7 @@ et prénom séparés par un espace), son id et sa date de naissance.
             #endregion
 
             #region Exercice 3.6
-            /*Ecrire une requête pour présenter le nom, l’id de section et le résultat annuel classé par ordre croissant sur la section de tous les étudiants appartenant aux sections 1010 et 1020 ayant un résultat annuel qui n’est pas compris entre 12 et 18. */
+            /*Ecrire une requête pour présenter le nom, l’id de section et le résultat annuel classé par ordre croissant sur la section de tous les étudiants appartenant aux sections 1010 et 1020 ayant un résultat annuel qui n’est pas compris entre 12 et 18. 
 
             var result = dc.Students
                 .Where(s => s.Section_ID == 1010 || s.Section_ID == 1020)
@@ -148,11 +149,50 @@ et prénom séparés par un espace), son id et sa date de naissance.
             //.Where( s =>
             //  (s.Section_ID == 1010 || s.Section_ID == 1020) &&
             //  (s.Year_Result < 12 || s.Year_Result > 18)
-            //)
+            //)*/
 
 
             #endregion
 
+            #region Exercice 4.1
+            /*Donner le résultat annuel moyen pour l’ensemble des étudiants. */
+
+            double averageResult = dc.Students.Average(s => s.Year_Result);
+            Console.WriteLine($"La moyenne est de {averageResult}/20.");
+
+            //OU
+
+            //Console.WriteLine($"La moyenne est de {dc.Students.Average(s => s.Year_Result)}/20.");
+            #endregion
+            #region Exercice 4.2 
+            /* Donner le plus haut résultat annuel obtenu par un étudiant.*/
+
+            int maxResult = dc.Students.Max(s => s.Year_Result);
+            Console.WriteLine($"Le résultat annuel maximum est de {maxResult}/20.");
+
+            #endregion
+            #region Exercice 4.3 
+            /*Donner la somme des résultats annuels. */
+
+            int sumResult = dc.Students.Sum(s => s.Year_Result);
+            Console.WriteLine($"La totalité des résultats annuels est de {sumResult} point(s).");
+
+            #endregion
+            #region Exercice 4.4 
+            /*Donner le résultat annuel le plus faible.*/
+
+            int minResult = dc.Students.Min(s => s.Year_Result);
+            Console.WriteLine($"Le résultat annuel le plus faible est de {minResult}/20.");
+
+            #endregion
+            #region Exercice 4.5 
+            /*Donner le nombre de lignes qui composent la séquence « Students » ayant obtenu un résultat annuel impair.*/
+
+            int nbResult = dc.Students.Count(s => s.Year_Result % 2 != 0);
+            Console.WriteLine($"Il y a {nbResult} étudiant(s) avec des résultats impairs.");
+
+
+            #endregion
             #endregion
 
             #region Console.ReadLine()
